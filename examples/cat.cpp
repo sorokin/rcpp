@@ -7,20 +7,26 @@ http://www.boost.org/LICENSE_1_0.txt)
 */
 #include <assert.h>
 #include <sysexits.h>
-#include "libc_file_handle.h"
+#include "raii/libc_file_handle.h"
 
 size_t const READ_BUFFER_SIZE = 32 * 1024;
 
 int main(int argc, char ** argv)
 {
-   if (argc == 0)
+   if (argc == 1)
+   {
+      printf("usage: %s [files]\n", argv[0]);
       return EX_USAGE;
+   }
 
-   for (int i = 1; i < (argc + 1); ++i)
+   for (int i = 1; i < argc; ++i)
    {
       raii::libc::file_handle file(::fopen(argv[i], "rb"));
       if (!file)
+      {
+         printf("failed to open \"%s\"\n", argv[i]);
          return EX_NOINPUT;
+      }
 
       for (;;)
       {
@@ -45,3 +51,4 @@ int main(int argc, char ** argv)
 
    return EXIT_SUCCESS;
 }
+
