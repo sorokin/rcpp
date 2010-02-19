@@ -61,9 +61,9 @@ struct module_handle_config
 
 struct map_file_view_handle_config
 {
-   typedef void const * underlying_resource_type;
-   static void const * invalid_value() { return NULL; }
-   static void dispose(void const * base_address)
+   typedef void * underlying_resource_type;
+   static void * invalid_value() { return NULL; }
+   static void dispose(void * base_address)
    {
       BOOL r = ::UnmapViewOfFile(base_address);
       assert(r != FALSE);
