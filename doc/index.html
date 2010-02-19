@@ -104,17 +104,17 @@
             </tr>
             <tr>
                <td><code>T & T::operator=(T && other)</code></td>
-               <td>Release ownership of object we own and take it from <code>other</code>. After this operation
+               <td>Destroy object we own and take ownership from <code>other</code>. After this operation
                this object owns the resource that object <code>other</code> owns before. After this operation <code>other</code>
                owns nothing</td>
             </tr>
             <tr>
                <td><code>T::~T()</code></td>
-               <td>Release ownership</td>
+               <td>Destroy object we own</td>
             </tr>
             <tr>
                <td><code>void T::reset(underlying_resource_type const & underlying_resource)</code></td>
-               <td>Release ownership of object we own and take it over <code>underlying_resource</code></td>
+               <td>Destroy object we own and take ownership over <code>underlying_resource</code></td>
             </tr>
             <tr>
                <td><code>underlying_resource_type T::release()</code></td>
@@ -156,7 +156,7 @@
             </tr>
             <tr>
                <td><code>static void dispose(T::underlying_resource_type const &)</code></td>
-               <td>Release an resource</td>
+               <td>Destroy resource</td>
             </tr>
          </table>
       </p>
