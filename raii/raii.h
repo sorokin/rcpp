@@ -69,8 +69,8 @@ namespace raii
          swap(*this, tmp);
       }
 
-      // strong guarantee if underlying_resource_type copy ctor nothrow
-      // weak guarantee elsewhere
+      // underlying_resource_type copy constructor must be nothrow
+      // or release() may leak
       underlying_resource_type release()
       {
          underlying_resource_type tmp = underlying_resource;
