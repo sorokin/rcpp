@@ -7,6 +7,7 @@
       <h2>Table of Content</h2>
       <ul>
          <li><a href="#introduction">Introduction</a></li>
+         <li><a href="#tutorial">5-minutes tutorial</a></li>
          <li><a href="#raiiwrapperdef">RAII-wrapper definition</a></li>
          <li><a href="#resourceconfdef">Resource-config definition</a></li>
          <li>
@@ -25,6 +26,7 @@
                <li><a href="#raiiposix">Header &lt;raii/posix_handles.h&gt;</a></li>
             </ul>
          </li>
+         <li><a href="#faq">Frequently Asked Questions</a></li>
       </ul>
       <h2 id="introduction">Introduction</h2>
       <p>
@@ -33,6 +35,44 @@
             <li>Facility for writing C++ <a href="#raiiwrapperdef">RAII-wrapper</a> class in a convenient, declarative way</li>
             <li>Collection of RAII-wrappers for different platforms (Windows API, libc, POSIX)</li>
          </ul>
+         The library support C++0x. Every RAII-wrapper you create with it will have move constuctor and move assignment operator.
+      </p>
+      <h2 id="tutorial">5-minutes tutorial</h2>
+      <p>
+<pre><font color="0000ff"><strong>#include <font color="#008000">&quot;stdio.h&quot;</font></strong></font>
+
+<font color="#444444">// raii::resource is localed here</font>
+<font color="0000ff"><strong>#include <font color="#008000">&quot;raii/raii.h&quot;</font></strong></font>
+
+<font color="#444444">// this is a resource config, it contains only three things</font>
+<strong>struct</strong> <font color="#2040a0">file_handle_config</font>
+<font color="4444FF"><strong>{</strong></font>
+   <font color="#444444">// create resource wrapper over FILE *</font>
+   <strong>typedef</strong> <font color="#2040a0">FILE</font> <font color="4444FF">*</font> <font color="#2040a0">underlying_resource_type</font><font color="4444FF">;</font>
+
+   <font color="#444444">// invalid value is NULL</font>
+   <strong>static</strong> <font color="#2040a0">FILE</font> <font color="4444FF">*</font> <font color="#2040a0">invalid_value</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font> <strong>return</strong> <font color="#2040a0">NULL</font><font color="4444FF">;</font> <font color="4444FF"><strong>}</strong></font>
+
+   <font color="#444444">// dispose function is fclose</font>
+   <strong>static</strong> <strong>void</strong> <font color="#2040a0">dispose</font><font color="4444FF">(</font><font color="#2040a0">FILE</font> <font color="4444FF">*</font> <font color="#2040a0">f</font><font color="4444FF">)</font>
+   <font color="4444FF"><strong>{</strong></font>
+      <font color="#2040a0">fclose</font><font color="4444FF">(</font><font color="#2040a0">f</font><font color="4444FF">)</font><font color="4444FF">;</font>
+   <font color="4444FF"><strong>}</strong></font>
+<font color="4444FF"><strong>}</strong></font><font color="4444FF">;</font>
+
+<font color="#444444">// give a short name for resource...</font>
+<strong>typedef</strong> <font color="#2040a0">raii</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">resource</font><font color="4444FF">&lt;</font><font color="#2040a0">file_handle_config</font><font color="4444FF">&gt;</font> <font color="#2040a0">file_handle</font><font color="4444FF">;</font>
+
+<strong>int</strong> <font color="#2040a0">main</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+   <font color="#444444">// ... and use it</font>
+   <font color="#2040a0">file_handle</font> <font color="#2040a0">f</font><font color="4444FF">(</font><font color="#2040a0">fopen</font><font color="4444FF">(</font><font color="#008000">&quot;test.txt&quot;</font>, <font color="#008000">&quot;r&quot;</font><font color="4444FF">)</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+   <font color="#444444">// work with file</font>
+   <font color="#444444">// it will be closed automatically</font>
+
+   <strong>return</strong> <font color="#2040a0">EXIT_SUCCESS</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font></pre>
       </p>
       <h2 id="raiiwrapperdef">RAII-wrapper definition</h2>
       <p>
@@ -271,6 +311,12 @@
                <td><code>munmap</code></td>
             </tr>
          </table>
+      </p>
+      <h2 id="faq">Frequently Asked Questions</h2>
+      <p>
+         <h3>Can I use <code>raii::resource</code> if my <code>type</code> does not have invalid value?</h3>
+         Yes, you can. You can create resource with <code>underlying_resource_type = boost::optional&lt;type&gt;</code>.
+         Invalid value of this resource will be <code>boost::none</code>.
       </p>
    </body>
 </html>
