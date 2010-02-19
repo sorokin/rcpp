@@ -5,8 +5,8 @@ Distributed under the Boost Software License, Version 1.0. (See
 accompanying file LICENSE_1_0.txt or copy at
 http://www.boost.org/LICENSE_1_0.txt)
 */
-#ifndef RAII0X_WIN_GDI_HANDLES_H_INCLUDED_0075b3b7_1ee9_4b70_910d_853bb6899eca
-#define RAII0X_WIN_GDI_HANDLES_H_INCLUDED_0075b3b7_1ee9_4b70_910d_853bb6899eca
+#ifndef RAII_WIN_GDI_HANDLES_H_INCLUDED_0075b3b7_1ee9_4b70_910d_853bb6899eca
+#define RAII_WIN_GDI_HANDLES_H_INCLUDED_0075b3b7_1ee9_4b70_910d_853bb6899eca
 
 #include <assert.h>
 #include "raii.h"

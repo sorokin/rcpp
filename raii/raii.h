@@ -5,8 +5,8 @@ Distributed under the Boost Software License, Version 1.0. (See
 accompanying file LICENSE_1_0.txt or copy at
 http://www.boost.org/LICENSE_1_0.txt)
 */
-#ifndef RAII0X_RAII0X_H_INCLUDED_a56eb2db_1624_45fd_969a_4ca4f1880455
-#define RAII0X_RAII0X_H_INCLUDED_a56eb2db_1624_45fd_969a_4ca4f1880455
+#ifndef RAII_RAII_H_INCLUDED_a56eb2db_1624_45fd_969a_4ca4f1880455
+#define RAII_RAII_H_INCLUDED_a56eb2db_1624_45fd_969a_4ca4f1880455
 
 #include <assert.h>
 #include <boost/config.hpp>
@@ -89,7 +89,7 @@ namespace raii
          swap(underlying_resource, other.underlying_resource);
       }
 
-      RAII0X_SAFE_BOOL_OPERATOR(underlying_resource != resource_config::invalid_value())
+      RAII_SAFE_BOOL_OPERATOR(underlying_resource != resource_config::invalid_value())
 
    private:
       underlying_resource_type underlying_resource;

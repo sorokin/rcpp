@@ -5,8 +5,8 @@ Distributed under the Boost Software License, Version 1.0. (See
 accompanying file LICENSE_1_0.txt or copy at
 http://www.boost.org/LICENSE_1_0.txt)
 */
-#ifndef RAII0X_WIN_KERNEL_HANDLES_H_INCLUDED_b6edfa01_7d0a_4ecd_90ef_f33c166824ad
-#define RAII0X_WIN_KERNEL_HANDLES_H_INCLUDED_b6edfa01_7d0a_4ecd_90ef_f33c166824ad
+#ifndef RAII_WIN_KERNEL_HANDLES_H_INCLUDED_b6edfa01_7d0a_4ecd_90ef_f33c166824ad
+#define RAII_WIN_KERNEL_HANDLES_H_INCLUDED_b6edfa01_7d0a_4ecd_90ef_f33c166824ad
 
 #include <assert.h>
 #include "raii.h"

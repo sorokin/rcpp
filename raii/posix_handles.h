@@ -5,8 +5,8 @@ Distributed under the Boost Software License, Version 1.0. (See
 accompanying file LICENSE_1_0.txt or copy at
 http://www.boost.org/LICENSE_1_0.txt)
 */
-#ifndef RAII0X_POSIX_HANDLES_H_INCLUDED_170340e7_4b0b_4b56_bd7b_4fd1e5383963
-#define RAII0X_POSIX_HANDLES_H_INCLUDED_170340e7_4b0b_4b56_bd7b_4fd1e5383963
+#ifndef RAII_POSIX_HANDLES_H_INCLUDED_170340e7_4b0b_4b56_bd7b_4fd1e5383963
+#define RAII_POSIX_HANDLES_H_INCLUDED_170340e7_4b0b_4b56_bd7b_4fd1e5383963
 
 #include <assert.h>
 #include <dirent.h>

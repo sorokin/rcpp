@@ -5,10 +5,10 @@ Distributed under the Boost Software License, Version 1.0. (See
 accompanying file LICENSE_1_0.txt or copy at
 http://www.boost.org/LICENSE_1_0.txt)
 */
-#ifndef RAII0X_SAFE_BOOL_H_INCLUDED_0105a57a_2d21_4feb_a819_a92056f15dc5
-#define RAII0X_SAFE_BOOL_H_INCLUDED_0105a57a_2d21_4feb_a819_a92056f15dc5
+#ifndef RAII_SAFE_BOOL_H_INCLUDED_0105a57a_2d21_4feb_a819_a92056f15dc5
+#define RAII_SAFE_BOOL_H_INCLUDED_0105a57a_2d21_4feb_a819_a92056f15dc5
 
-#define RAII0X_SAFE_BOOL_OPERATOR(cond)                                       \
+#define RAII_SAFE_BOOL_OPERATOR(cond)                                         \
    struct _sb_inner_struct                                                    \
    {                                                                          \
       void sb_function()                                                      \
