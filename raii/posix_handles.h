@@ -11,6 +11,7 @@ http://www.boost.org/LICENSE_1_0.txt)
 #include <assert.h>
 #include <dirent.h>
 #include <unistd.h>
+#include <sys/mman.h>
 #include "raii.h"
 
 namespace raii {
@@ -39,10 +40,22 @@ struct file_descriptor_config
    }
 };
 
+struct map_file_view_handle_config
+{
+   typedef std::pair<void *, size_t> underlying_resource_type;
+   static underlying_resource_type invalid_value() { return underlying_resource_type(MAP_FAILED, 0); }
+   static void dispose(underlying_resource_type const & address_length)
+   {
+      int r = ::munmap(address_length.first, address_length.second);
+      assert(r == 0);
+   }
+};
+
 } // namespace detail
 
-typedef resource<detail::dirent_handle_config>   dirent_handle;
-typedef resource<detail::file_descriptor_config> file_descriptor;
+typedef resource<detail::dirent_handle_config>        dirent_handle;
+typedef resource<detail::file_descriptor_config>      file_descriptor;
+typedef resource<detail::map_file_view_handle_config> map_file_view_handle;
 
 } // namespace posix
 } // namespace raii
