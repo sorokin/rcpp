@@ -1,0 +1,270 @@
+<html>
+   <head>
+      <title>RAII C++ library Documentation</title>
+   </head>
+   <body>
+      <h1>RAII C++ library Documentation</h1>
+      <h2>Table of Content</h2>
+      <ul>
+         <li><a href="#introduction">Introduction</a></li>
+         <li><a href="#raiiwrapperdef">RAII-wrapper definition</a></li>
+         <li><a href="#resourceconfdef">Resource-config definition</a></li>
+         <li>
+            Reference
+            <ul>
+               <li>
+                  Header &lt;raii/raii.h&gt;
+                  <ul>
+                     <li><a href="#raiiresource">Class raii::resource</a></li>
+                  </ul>
+               </li>
+               <li><a href="#raiiwinkernel">Header &lt;raii/win_kernel_handles.h&gt;</a></li>
+               <li><a href="#raiiwingdi">Header &lt;raii/win_gdi_handles.h&gt;</a></li>
+               <li><a href="#raiiwinsocket">Header &lt;raii/win_socket_handle.h&gt;</a></li>
+               <li><a href="#raiilibcfile">Header &lt;raii/libc_file_handle.h&gt;</a></li>
+               <li><a href="#raiiposix">Header &lt;raii/posix_handles.h&gt;</a></li>
+            </ul>
+         </li>
+      </ul>
+      <h2 id="introduction">Introduction</h2>
+      <p>
+         This library provide two facilities
+         <ul>
+            <li>Facility for writing C++ <a href="#raiiwrapperdef">RAII-wrapper</a> class in a convinient, declarative way</li>
+            <li>Collection of RAII-wrappers for different platforms (Windows API, libc, POSIX)</li>
+         </ul>
+      </p>
+      <h2 id="raiiwrapperdef">RAII-wrapper definition</h2>
+      <p>
+         RAII-wrapper class <code>T</code> is a class an instance of that contains an object of type
+         <code>underlying_resource_type</code> and has the following public members:
+         <table>
+            <tr>
+               <td>Member</td>
+               <td>Description</td>
+            </tr>
+            <tr>
+               <td><code>T::underlying_resource_type</code></td>
+               <td>An type of object we hold</td>
+            </tr>
+            <tr>
+               <td><code>T::T()</code></td>
+               <td>Create an wrapper that owns nothing</td>
+            </tr>
+            <tr>
+               <td><code>explicit T::T(underlying_resource_type const &&)</code></td>
+               <td>Take ownership of resource</td>
+            </tr>
+            <tr>
+               <td><code>T::T(T && other)</code></td>
+               <td>Take an ownership from <code>other</code>. After this operation this object owns the resource
+               that object <code>other</code> owns before. After this operation <code>other</code> owns nothing</td>
+            </tr>
+            <tr>
+               <td><code>T & T::operator=(T && other)</code></td>
+               <td>Release ownership of object we own and take it from <code>other</code>. After this operation
+               this object owns the resource that object <code>other</code> owns before. After this operation <code>other</code>
+               owns nothing</td>
+            </tr>
+            <tr>
+               <td><code>T::~T()</code></td>
+               <td>Release ownership</td>
+            </tr>
+            <tr>
+               <td><code>void T::reset(underlying_resource_type const & underlying_resource)</code></td>
+               <td>Release ownership of object we own and take it over <code>underlying_resource</code></td>
+            </tr>
+            <tr>
+               <td><code>underlying_resource_type T::release()</code></td>
+               <td>Release ownership of object we own and return underlying resource</td>
+            </tr>
+            <tr>
+               <td><code>underlying_resource_type T::get() const</code></td>
+               <td>Returns copy of underlying resource</td>
+            </tr>
+            <tr>
+               <td><code>operator &lt;unspecified-bool-type&gt;() const</code></td>
+               <td>Returns true if we own some resource, false elsewhere</td>
+            </tr>
+            <tr>
+               <td><code>void std::swap(T & a, T & b)</code></td>
+               <td>Swap two RAII-wrappers. After this operation object <code>a</code> owns a resource that
+               <code>b</code> owned before. And <code>b</code> owns a resource that <code>a</code> owned
+               before</td>
+            </tr>
+         </table>
+      </p>
+      <h2 id="resourceconfdef">Resource-config definition</h2>
+      <p>
+         Resource-config class <code>T</code> is a class that have the following public members:
+         <table>
+            <tr>
+               <td>Member</td>
+               <td>Description</td>
+            </tr>
+            <tr>
+               <td><code>T::underlying_resource_type</code></td>
+               <td>An type of object that corresponding RAII-wrapper hold</td>
+            </tr>
+            <tr>
+               <td><code>static T::underlying_resource_type T::invalid_value()</code></td>
+               <td>The value that valid object of type <code>underlying_resource_type</code> can not have.
+               If RAII-wrapper underlying resource has this value it means that RAII-wrapper does not
+               own [TODO: own(s/ed)?] any resource.</td>
+            </tr>
+            <tr>
+               <td><code>static void dispose(T::underlying_resource_type const &)</code></td>
+               <td>Release an resource</td>
+            </tr>
+         </table>
+      </p>
+      <h2 id="raiiresource">Class raii::resource</h2>
+      <p>
+         Class <code>raii::resource</code> is parametrized with <a href="#resourceconfdef">resource-config</a>
+         type and provide <a href="raiiwrapperdef">RAII-wrapper</a> interface. See [TODO: raii/raii.h].
+      </p>
+      <h2 id="raiiwinkernel">Header &lt;raii/win_kernel_handles.h&gt;</h2>
+      <p>
+         <table>
+            <tr>
+               <td>RAII-wrapper</td>
+               <td>underlying resource type</td>
+               <td>invalid value</td>
+               <td>dispose function</td>
+            </tr>
+            <tr>
+               <td><code>raii::win::file_handle</code></td>
+               <td><code>HANDLE</code></td>
+               <td><code>INVALID_HANDLE_VALUE</code></td>
+               <td><code>CloseHandle</code></td>
+            </tr>
+            <tr>
+               <td><code>raii::win::kernel_handle</code></td>
+               <td><code>HANDLE</code></td>
+               <td><code>NULL</code></td>
+               <td><code>CloseHandle</code></td>
+            </tr>
+            <tr>
+               <td><code>raii::win::find_file_handle</code></td>
+               <td><code>HANDLE</code></td>
+               <td><code>NULL</code></td>
+               <td><code>FindClose</code></td>
+            </tr>
+            <tr>
+               <td><code>raii::win::module_handle</code></td>
+               <td><code>HMODULE</code></td>
+               <td><code>NULL</code></td>
+               <td><code>FreeLibrary</code></td>
+            </tr>
+            <tr>
+               <td><code>raii::win::map_file_view_handle</code></td>
+               <td><code>void *</code></td>
+               <td><code>NULL</code></td>
+               <td><code>UnmapViewOfFile</code></td>
+            </tr>
+         </table>
+      </p>
+      <h2 id="raiiwingdi">Header &lt;raii/win_gdi_handles.h&gt;</h2>
+         <table>
+            <tr>
+               <td>RAII-wrapper</td>
+               <td>underlying resource type</td>
+               <td>invalid value</td>
+               <td>dispose function</td>
+            </tr>
+            <tr>
+               <td>raii::win::accelerator_table_handle</td>
+               <td>HACCEL</td>
+               <td>NULL</td>
+               <td>DestroyAcceleratorTable</td>
+            </tr>
+            <tr>
+               <td>raii::win::gdiobj_handle</td>
+               <td>HGDIOBJ</td>
+               <td>NULL</td>
+               <td>DeleteObject</td>
+            </tr>
+            <tr>
+               <td>raii::win::cursor_handle</td>
+               <td>HCURSOR</td>
+               <td>NULL</td>
+               <td>DestroyCursor</td>
+            </tr>
+            <tr>
+               <td>raii::win::icon_handle</td>
+               <td>HICON</td>
+               <td>NULL</td>
+               <td>DestroyIcon</td>
+            </tr>
+            <tr>
+               <td>raii::win::menu_handle</td>
+               <td>HMENU</td>
+               <td>NULL</td>
+               <td>DestroyMenu</td>
+            </tr>
+            <tr>
+               <td>raii::win::window_handle</td>
+               <td>HWND</td>
+               <td>NULL</td>
+               <td>DestroyWindow</td>
+            </tr>
+         </table>
+      <h2 id="raiiwinsocket">Header &lt;raii/win_socket_handle.h&gt;</h2>
+      <p>
+         <table>
+            <tr>
+               <td>RAII-wrapper</td>
+               <td>underlying resource type</td>
+               <td>invalid value</td>
+               <td>dispose function</td>
+            </tr>
+            <tr>
+               <td>raii::win::socket_handle</td>
+               <td>SOCKET</td>
+               <td>INVALID_SOCKET</td>
+               <td>closesocket</td>
+            </tr>
+         </table>
+      </p>
+      <h2 id="raiilibcfile">Header &lt;raii/libc_file_handle.h&gt;</h2>
+      <p>
+         <table>
+            <tr>
+               <td>RAII-wrapper</td>
+               <td>underlying resource type</td>
+               <td>invalid value</td>
+               <td>dispose function</td>
+            </tr>
+            <tr>
+               <td>raii::libc::file_handle</td>
+               <td>FILE *</td>
+               <td>NULL</td>
+               <td>fclose</td>
+            </tr>
+         </table>
+      </p>
+      <h2 id="raiiposix">Header &lt;raii/posix_handles.h&gt;</h2>
+      <p>
+         <table>
+            <tr>
+               <td>RAII-wrapper</td>
+               <td>underlying resource type</td>
+               <td>invalid value</td>
+               <td>dispose function</td>
+            </tr>
+            <tr>
+               <td>raii::posix::dirent_handle</td>
+               <td>DIR *</td>
+               <td>NULL</td>
+               <td>closedir</td>
+            </tr>
+            <tr>
+               <td>raii::posix::file_descriptor</td>
+               <td>int</td>
+               <td>-1</td>
+               <td>close</td>
+            </tr>
+         </table>
+      </p>
+   </body>
+</html>
