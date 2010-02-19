@@ -61,7 +61,7 @@ namespace raii
             resource_config::dispose(underlying_resource);
       }
 
-      void reset(underlying_resource_type const & underlying_resource)
+      void reset(underlying_resource_type const & underlying_resource = resource_config::invalid_value())
       {
          resource<resource_config> tmp(underlying_resource);
 
