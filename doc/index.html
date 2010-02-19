@@ -4,11 +4,12 @@
    </head>
    <body>
       <h1>RAII C++ library Documentation</h1>
+      <font color="#808080">Copyright &copy; 2010 Ivan Sorokin</font>
       <h2>Table of Content</h2>
       <ul>
          <li><a href="#introduction">Introduction</a></li>
          <li><a href="#tutorial">5-minutes tutorial</a></li>
-         <li><a href="#raiiwrapperdef">RAII-wrapper definition</a></li>
+         <li><a href="#raiiwrapperdef">Resource-wrapper definition</a></li>
          <li><a href="#resourceconfdef">Resource-config definition</a></li>
          <li>
             Reference
@@ -32,10 +33,10 @@
       <p>
          This library provide two facilities
          <ul>
-            <li>Facility for writing C++ <a href="#raiiwrapperdef">RAII-wrapper</a> class in a convenient, declarative way</li>
-            <li>Collection of RAII-wrappers for different platforms (Windows API, libc, POSIX)</li>
+            <li>Facility for writing C++ <a href="#raiiwrapperdef">resource-wrapper</a> class in a convenient, declarative way</li>
+            <li>Collection of resource-wrappers for different platforms (Windows API, libc, POSIX)</li>
          </ul>
-         The library support C++0x. Every RAII-wrapper you create with it will have move constuctor and move assignment operator.
+         The library support C++0x. Every resource-wrapper you create with it will have move constuctor and move assignment operator.
       </p>
       <h2 id="tutorial">5-minutes tutorial</h2>
       <p>
@@ -74,9 +75,9 @@
    <strong>return</strong> <font color="#2040a0">EXIT_SUCCESS</font><font color="4444FF">;</font>
 <font color="4444FF"><strong>}</strong></font></pre>
       </p>
-      <h2 id="raiiwrapperdef">RAII-wrapper definition</h2>
+      <h2 id="raiiwrapperdef">Resource-wrapper definition</h2>
       <p>
-         RAII-wrapper class <code>T</code> is a class an instance of that contains an object of type
+         Resource-wrapper class <code>T</code> is a class an instance of that contains an object of type
          <code>underlying_resource_type</code> and has the following public members:
          <table>
             <tr>
@@ -128,7 +129,7 @@
             </tr>
             <tr>
                <td><code>void std::swap(T & a, T & b)</code></td>
-               <td>Swap two RAII-wrappers. After this operation object <code>a</code> owns a resource that
+               <td>Swap two resource-wrappers. After this operation object <code>a</code> owns a resource that
                <code>b</code> owned before. And <code>b</code> owns a resource that <code>a</code> owned
                before</td>
             </tr>
@@ -144,12 +145,12 @@
             </tr>
             <tr>
                <td><code>T::underlying_resource_type</code></td>
-               <td>An type of object that corresponding RAII-wrapper hold</td>
+               <td>An type of object that corresponding resource-wrapper hold</td>
             </tr>
             <tr>
                <td><code>static T::underlying_resource_type T::invalid_value()</code></td>
                <td>The value that valid object of type <code>underlying_resource_type</code> can not have.
-               If RAII-wrapper underlying resource has this value it means that RAII-wrapper does not
+               If resource-wrapper underlying resource has this value it means that RAII-wrapper does not
                own any resource.</td>
             </tr>
             <tr>
@@ -161,13 +162,13 @@
       <h2 id="raiiresource">Class raii::resource</h2>
       <p>
          Class <code>raii::resource</code> is parametrized with <a href="#resourceconfdef">resource-config</a>
-         type and provide <a href="#raiiwrapperdef">RAII-wrapper</a> interface. See <a href="../raii/raii.h">&lt;raii/raii.h&gt;</a>.
+         type and provide <a href="#raiiwrapperdef">resource-wrapper</a> interface. See <a href="../raii/raii.h">&lt;raii/raii.h&gt;</a>.
       </p>
       <h2 id="raiiwinkernel">Header &lt;raii/win_kernel_handles.h&gt;</h2>
       <p>
          <table>
             <tr>
-               <td>RAII-wrapper</td>
+               <td>resource wrapper</td>
                <td>underlying resource type</td>
                <td>invalid value</td>
                <td>dispose function</td>
@@ -207,7 +208,7 @@
       <h2 id="raiiwingdi">Header &lt;raii/win_gdi_handles.h&gt;</h2>
          <table>
             <tr>
-               <td>RAII-wrapper</td>
+               <td>resource wrapper</td>
                <td>underlying resource type</td>
                <td>invalid value</td>
                <td>dispose function</td>
@@ -253,7 +254,7 @@
       <p>
          <table>
             <tr>
-               <td>RAII-wrapper</td>
+               <td>resource wrapper</td>
                <td>underlying resource type</td>
                <td>invalid value</td>
                <td>dispose function</td>
@@ -270,7 +271,7 @@
       <p>
          <table>
             <tr>
-               <td>RAII-wrapper</td>
+               <td>resource wrapper</td>
                <td>underlying resource type</td>
                <td>invalid value</td>
                <td>dispose function</td>
@@ -287,7 +288,7 @@
       <p>
          <table>
             <tr>
-               <td>RAII-wrapper</td>
+               <td>resource wrapper</td>
                <td>underlying resource type</td>
                <td>invalid value</td>
                <td>dispose function</td>
