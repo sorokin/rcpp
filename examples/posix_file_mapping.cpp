@@ -18,7 +18,7 @@ http://www.boost.org/LICENSE_1_0.txt)
 
 namespace
 {
-   raii::posix::map_file_view_handle create_file_view(size_t length, int prot, int flags, raii::posix::file_descriptor const & fd, off_t offset)
+   raii::posix::map_file_view_handle create_file_view(size_t length, int prot, int flags, raii::posix::file_handle const & fd, off_t offset)
    {
       void * address = ::mmap(NULL, length, prot, flags, fd.get(), offset);
       if (address == MAP_FAILED)
@@ -35,7 +35,7 @@ int main(int argc, char ** argv)
 
    try
    {
-      raii::posix::file_descriptor fd(::open(argv[1], O_RDONLY));
+      raii::posix::file_handle fd(::open(argv[1], O_RDONLY));
       if (!fd)
          return EX_NOINPUT;
 

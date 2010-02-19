@@ -29,7 +29,7 @@ struct dirent_handle_config
    }
 };
 
-struct file_descriptor_config
+struct file_handle_config
 {
    typedef int underlying_resource_type;
    static int invalid_value() { return -1; }
@@ -54,7 +54,7 @@ struct map_file_view_handle_config
 } // namespace detail
 
 typedef resource<detail::dirent_handle_config>        dirent_handle;
-typedef resource<detail::file_descriptor_config>      file_descriptor;
+typedef resource<detail::file_handle_config>          file_handle;
 typedef resource<detail::map_file_view_handle_config> map_file_view_handle;
 
 } // namespace posix
