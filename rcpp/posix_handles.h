@@ -5,16 +5,16 @@ Distributed under the Boost Software License, Version 1.0. (See
 accompanying file LICENSE_1_0.txt or copy at
 http://www.boost.org/LICENSE_1_0.txt)
 */
-#ifndef RAII_POSIX_HANDLES_H_INCLUDED_170340e7_4b0b_4b56_bd7b_4fd1e5383963
-#define RAII_POSIX_HANDLES_H_INCLUDED_170340e7_4b0b_4b56_bd7b_4fd1e5383963
+#ifndef RCPP_POSIX_HANDLES_H_INCLUDED_170340e7_4b0b_4b56_bd7b_4fd1e5383963
+#define RCPP_POSIX_HANDLES_H_INCLUDED_170340e7_4b0b_4b56_bd7b_4fd1e5383963
 
 #include <assert.h>
 #include <dirent.h>
 #include <unistd.h>
 #include <sys/mman.h>
-#include "raii.h"
+#include "resource.h"
 
-namespace raii {
+namespace rcpp {
 namespace posix {
 namespace detail {
 
@@ -58,6 +58,6 @@ typedef resource<detail::file_handle_config>          file_handle;
 typedef resource<detail::map_file_view_handle_config> map_file_view_handle;
 
 } // namespace posix
-} // namespace raii
+} // namespace rcpp
 
 #endif

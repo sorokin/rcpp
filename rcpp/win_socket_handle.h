@@ -5,13 +5,13 @@ Distributed under the Boost Software License, Version 1.0. (See
 accompanying file LICENSE_1_0.txt or copy at
 http://www.boost.org/LICENSE_1_0.txt)
 */
-#ifndef RAII_WIN_SOCKET_HANDLE_H_INCLUDED_9d4a28d5_beee_4854_b2af_ad4073a6a25f
-#define RAII_WIN_SOCKET_HANDLE_H_INCLUDED_9d4a28d5_beee_4854_b2af_ad4073a6a25f
+#ifndef RCPP_WIN_SOCKET_HANDLE_H_INCLUDED_9d4a28d5_beee_4854_b2af_ad4073a6a25f
+#define RCPP_WIN_SOCKET_HANDLE_H_INCLUDED_9d4a28d5_beee_4854_b2af_ad4073a6a25f
 
 #include <assert.h>
-#include "raii.h"
+#include "resource.h"
 
-namespace raii {
+namespace rcpp {
 namespace win {
 namespace detail {
 
@@ -31,6 +31,6 @@ struct socket_handle_config
 typedef resource<socket_handle_config> socket_handle;
 
 } // namespace win
-} // namespace raii
+} // namespace rcpp
 
 #endif

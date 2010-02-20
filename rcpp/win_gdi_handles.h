@@ -5,13 +5,13 @@ Distributed under the Boost Software License, Version 1.0. (See
 accompanying file LICENSE_1_0.txt or copy at
 http://www.boost.org/LICENSE_1_0.txt)
 */
-#ifndef RAII_WIN_GDI_HANDLES_H_INCLUDED_0075b3b7_1ee9_4b70_910d_853bb6899eca
-#define RAII_WIN_GDI_HANDLES_H_INCLUDED_0075b3b7_1ee9_4b70_910d_853bb6899eca
+#ifndef RCPP_WIN_GDI_HANDLES_H_INCLUDED_0075b3b7_1ee9_4b70_910d_853bb6899eca
+#define RCPP_WIN_GDI_HANDLES_H_INCLUDED_0075b3b7_1ee9_4b70_910d_853bb6899eca
 
 #include <assert.h>
-#include "raii.h"
+#include "resource.h"
 
-namespace raii {
+namespace rcpp {
 namespace win {
 namespace detail {
 
@@ -93,6 +93,6 @@ typedef resource<detail::menu_handle_config>              menu_handle;
 typedef resource<detail::window_handle_config>            window_handle;
 
 } // namespace win
-} // namespace raii
+} // namespace rcpp
 
 #endif

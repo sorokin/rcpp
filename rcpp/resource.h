@@ -5,8 +5,8 @@ Distributed under the Boost Software License, Version 1.0. (See
 accompanying file LICENSE_1_0.txt or copy at
 http://www.boost.org/LICENSE_1_0.txt)
 */
-#ifndef RAII_RAII_H_INCLUDED_a56eb2db_1624_45fd_969a_4ca4f1880455
-#define RAII_RAII_H_INCLUDED_a56eb2db_1624_45fd_969a_4ca4f1880455
+#ifndef RCPP_RESOURCE_H_INCLUDED_a56eb2db_1624_45fd_969a_4ca4f1880455
+#define RCPP_RESOURCE_H_INCLUDED_a56eb2db_1624_45fd_969a_4ca4f1880455
 
 #include <assert.h>
 #include <boost/config.hpp>
@@ -24,7 +24,7 @@ struct resource_config
 }
 */
 
-namespace raii
+namespace rcpp
 {
    template <typename resource_config>
    struct resource : boost::noncopyable
@@ -89,7 +89,7 @@ namespace raii
          swap(underlying_resource, other.underlying_resource);
       }
 
-      RAII_SAFE_BOOL_OPERATOR(underlying_resource != resource_config::invalid_value())
+      RCPP_SAFE_BOOL_OPERATOR(underlying_resource != resource_config::invalid_value())
 
    private:
       underlying_resource_type underlying_resource;
@@ -99,7 +99,7 @@ namespace raii
 namespace std
 {
    template <typename resource_config>
-   void swap(raii::resource<resource_config> & a, raii::resource<resource_config> & b)
+   void swap(rcpp::resource<resource_config> & a, rcpp::resource<resource_config> & b)
    {
       a.swap(b);
    }

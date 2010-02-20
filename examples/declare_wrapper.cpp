@@ -7,8 +7,8 @@ http://www.boost.org/LICENSE_1_0.txt)
 */
 #include "stdio.h"
 
-// raii::resource is localed here
-#include "raii/raii.h"
+// rcpp::resource is localed here
+#include "rcpp/resource.h"
 
 // this is a resource config, it contains only three things
 struct file_handle_config
@@ -27,7 +27,7 @@ struct file_handle_config
 };
 
 // give a short name for resource...
-typedef raii::resource<file_handle_config> file_handle;
+typedef rcpp::resource<file_handle_config> file_handle;
 
 int main()
 {

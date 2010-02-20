@@ -7,7 +7,7 @@ http://www.boost.org/LICENSE_1_0.txt)
 */
 #include <assert.h>
 #include <sysexits.h>
-#include "raii/libc_file_handle.h"
+#include "rcpp/libc_file_handle.h"
 
 size_t const READ_BUFFER_SIZE = 32 * 1024;
 
@@ -21,7 +21,7 @@ int main(int argc, char ** argv)
 
    for (int i = 1; i < argc; ++i)
    {
-      raii::libc::file_handle file(::fopen(argv[i], "rb"));
+      rcpp::libc::file_handle file(::fopen(argv[i], "rb"));
       if (!file)
       {
          printf("failed to open \"%s\"\n", argv[i]);

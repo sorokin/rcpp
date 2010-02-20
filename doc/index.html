@@ -1,30 +1,30 @@
 <html>
    <head>
-      <title>RAII C++ library Documentation</title>
+      <title>RCPP C++ library Documentation</title>
    </head>
    <body>
-      <h1>RAII C++ library Documentation</h1>
+      <h1>RCPP C++ library Documentation</h1>
       <font color="#808080">Copyright &copy; 2010 Ivan Sorokin</font>
       <h2>Table of Content</h2>
       <ul>
          <li><a href="#introduction">Introduction</a></li>
          <li><a href="#tutorial">5-minutes tutorial</a></li>
-         <li><a href="#raiiwrapperdef">Resource-wrapper definition</a></li>
+         <li><a href="#rcppwrapperdef">Resource-wrapper definition</a></li>
          <li><a href="#resourceconfdef">Resource-config definition</a></li>
          <li>
             Reference
             <ul>
                <li>
-                  Header &lt;raii/raii.h&gt;
+                  Header &lt;rcpp/resource.h&gt;
                   <ul>
-                     <li><a href="#raiiresource">Class raii::resource</a></li>
+                     <li><a href="#rcppresource">Class rcpp::resource</a></li>
                   </ul>
                </li>
-               <li><a href="#raiiwinkernel">Header &lt;raii/win_kernel_handles.h&gt;</a></li>
-               <li><a href="#raiiwingdi">Header &lt;raii/win_gdi_handles.h&gt;</a></li>
-               <li><a href="#raiiwinsocket">Header &lt;raii/win_socket_handle.h&gt;</a></li>
-               <li><a href="#raiilibcfile">Header &lt;raii/libc_file_handle.h&gt;</a></li>
-               <li><a href="#raiiposix">Header &lt;raii/posix_handles.h&gt;</a></li>
+               <li><a href="#rcppwinkernel">Header &lt;rcpp/win_kernel_handles.h&gt;</a></li>
+               <li><a href="#rcppwingdi">Header &lt;rcpp/win_gdi_handles.h&gt;</a></li>
+               <li><a href="#rcppwinsocket">Header &lt;rcpp/win_socket_handle.h&gt;</a></li>
+               <li><a href="#rcpplibcfile">Header &lt;rcpp/libc_file_handle.h&gt;</a></li>
+               <li><a href="#rcppposix">Header &lt;rcpp/posix_handles.h&gt;</a></li>
             </ul>
          </li>
          <li><a href="#notes">Notes</a></li>
@@ -34,7 +34,7 @@
       <p>
          This library provide two facilities
          <ul>
-            <li>Facility for writing C++ <a href="#raiiwrapperdef">resource-wrapper</a> class in a convenient, declarative way</li>
+            <li>Facility for writing C++ <a href="#rcppwrapperdef">resource-wrapper</a> class in a convenient, declarative way</li>
             <li>Collection of resource-wrappers for different platforms (Windows API, libc, POSIX)</li>
          </ul>
          The library support C++0x. Every resource-wrapper you create with it will have move constuctor and move assignment operator.
@@ -43,8 +43,8 @@
       <p>
 <pre><font color="0000ff"><strong>#include <font color="#008000">&quot;stdio.h&quot;</font></strong></font>
 
-<font color="#444444">// raii::resource is localed here</font>
-<font color="0000ff"><strong>#include <font color="#008000">&quot;raii/raii.h&quot;</font></strong></font>
+<font color="#444444">// rcpp::resource is localed here</font>
+<font color="0000ff"><strong>#include <font color="#008000">&quot;rcpp/resource.h&quot;</font></strong></font>
 
 <font color="#444444">// this is a resource config, it contains only three things</font>
 <strong>struct</strong> <font color="#2040a0">file_handle_config</font>
@@ -63,7 +63,7 @@
 <font color="4444FF"><strong>}</strong></font><font color="4444FF">;</font>
 
 <font color="#444444">// give a short name for resource...</font>
-<strong>typedef</strong> <font color="#2040a0">raii</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">resource</font><font color="4444FF">&lt;</font><font color="#2040a0">file_handle_config</font><font color="4444FF">&gt;</font> <font color="#2040a0">file_handle</font><font color="4444FF">;</font>
+<strong>typedef</strong> <font color="#2040a0">rcpp</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">resource</font><font color="4444FF">&lt;</font><font color="#2040a0">file_handle_config</font><font color="4444FF">&gt;</font> <font color="#2040a0">file_handle</font><font color="4444FF">;</font>
 
 <strong>int</strong> <font color="#2040a0">main</font><font color="4444FF">(</font><font color="4444FF">)</font>
 <font color="4444FF"><strong>{</strong></font>
@@ -76,7 +76,7 @@
    <strong>return</strong> <font color="#2040a0">EXIT_SUCCESS</font><font color="4444FF">;</font>
 <font color="4444FF"><strong>}</strong></font></pre>
       </p>
-      <h2 id="raiiwrapperdef">Resource-wrapper definition</h2>
+      <h2 id="rcppwrapperdef">Resource-wrapper definition</h2>
       <p>
          Resource-wrapper class <code>T</code> is a class an instance of that contains an object of type
          <code>underlying_resource_type</code> and has the following public members:
@@ -151,7 +151,7 @@
             <tr>
                <td><code>static T::underlying_resource_type T::invalid_value()</code></td>
                <td>The value that valid object of type <code>underlying_resource_type</code> can not have.
-               If resource-wrapper underlying resource has this value it means that RAII-wrapper does not
+               If resource-wrapper underlying resource has this value it means that rcpp-wrapper does not
                own any resource.</td>
             </tr>
             <tr>
@@ -160,12 +160,12 @@
             </tr>
          </table>
       </p>
-      <h2 id="raiiresource">Class raii::resource</h2>
+      <h2 id="rcppresource">Class rcpp::resource</h2>
       <p>
-         Class <code>raii::resource</code> is parametrized with <a href="#resourceconfdef">resource-config</a>
-         type and provide <a href="#raiiwrapperdef">resource-wrapper</a> interface. See <a href="../raii/raii.h">&lt;raii/raii.h&gt;</a>.
+         Class <code>rcpp::resource</code> is parametrized with <a href="#resourceconfdef">resource-config</a>
+         type and provide <a href="#rcppwrapperdef">resource-wrapper</a> interface. See <a href="../rcpp/rcpp.h">&lt;rcpp/rcpp.h&gt;</a>.
       </p>
-      <h2 id="raiiwinkernel">Header <a href="../raii/win_kernel_handles.h">&lt;raii/win_kernel_handles.h&gt;</a></h2>
+      <h2 id="rcppwinkernel">Header <a href="../rcpp/win_kernel_handles.h">&lt;rcpp/win_kernel_handles.h&gt;</a></h2>
       <p>
          <table>
             <tr>
@@ -175,38 +175,38 @@
                <td>dispose function</td>
             </tr>
             <tr>
-               <td><code>raii::win::file_handle</code></td>
+               <td><code>rcpp::win::file_handle</code></td>
                <td><code>HANDLE</code></td>
                <td><code>INVALID_HANDLE_VALUE</code></td>
                <td><code>CloseHandle</code></td>
             </tr>
             <tr>
-               <td><code>raii::win::kernel_handle</code></td>
+               <td><code>rcpp::win::kernel_handle</code></td>
                <td><code>HANDLE</code></td>
                <td><code>NULL</code></td>
                <td><code>CloseHandle</code></td>
             </tr>
             <tr>
-               <td><code>raii::win::find_file_handle</code></td>
+               <td><code>rcpp::win::find_file_handle</code></td>
                <td><code>HANDLE</code></td>
                <td><code>NULL</code></td>
                <td><code>FindClose</code></td>
             </tr>
             <tr>
-               <td><code>raii::win::module_handle</code></td>
+               <td><code>rcpp::win::module_handle</code></td>
                <td><code>HMODULE</code></td>
                <td><code>NULL</code></td>
                <td><code>FreeLibrary</code></td>
             </tr>
             <tr>
-               <td><code>raii::win::map_file_view_handle</code></td>
+               <td><code>rcpp::win::map_file_view_handle</code></td>
                <td><code>void *</code></td>
                <td><code>NULL</code></td>
                <td><code>UnmapViewOfFile</code></td>
             </tr>
          </table>
       </p>
-      <h2 id="raiiwingdi">Header <a href="../raii/win_gdi_handles.h">&lt;raii/win_gdi_handles.h&gt;</a></h2>
+      <h2 id="rcppwingdi">Header <a href="../rcpp/win_gdi_handles.h">&lt;rcpp/win_gdi_handles.h&gt;</a></h2>
          <table>
             <tr>
                <td>resource wrapper</td>
@@ -215,43 +215,43 @@
                <td>dispose function</td>
             </tr>
             <tr>
-               <td><code>raii::win::accelerator_table_handle</code></td>
+               <td><code>rcpp::win::accelerator_table_handle</code></td>
                <td><code>HACCEL</code></td>
                <td><code>NULL</code></td>
                <td><code>DestroyAcceleratorTable</code></td>
             </tr>
             <tr>
-               <td><code>raii::win::gdiobj_handle</code></td>
+               <td><code>rcpp::win::gdiobj_handle</code></td>
                <td><code>HGDIOBJ</code></td>
                <td><code>NULL</code></td>
                <td><code>DeleteObject</code></td>
             </tr>
             <tr>
-               <td><code>raii::win::cursor_handle</code></td>
+               <td><code>rcpp::win::cursor_handle</code></td>
                <td><code>HCURSOR</code></td>
                <td><code>NULL</code></td>
                <td><code>DestroyCursor</code></td>
             </tr>
             <tr>
-               <td><code>raii::win::icon_handle</code></td>
+               <td><code>rcpp::win::icon_handle</code></td>
                <td><code>HICON</code></td>
                <td><code>NULL</code></td>
                <td><code>DestroyIcon</code></td>
             </tr>
             <tr>
-               <td><code>raii::win::menu_handle</code></td>
+               <td><code>rcpp::win::menu_handle</code></td>
                <td><code>HMENU</code></td>
                <td><code>NULL</code></td>
                <td><code>DestroyMenu</code></td>
             </tr>
             <tr>
-               <td><code>raii::win::window_handle</code></td>
+               <td><code>rcpp::win::window_handle</code></td>
                <td><code>HWND</code></td>
                <td><code>NULL</code></td>
                <td><code>DestroyWindow</code></td>
             </tr>
          </table>
-      <h2 id="raiiwinsocket">Header <a href="../raii/win_socket_handle.h">&lt;raii/win_socket_handle.h&gt;</a></h2>
+      <h2 id="rcppwinsocket">Header <a href="../rcpp/win_socket_handle.h">&lt;rcpp/win_socket_handle.h&gt;</a></h2>
       <p>
          <table>
             <tr>
@@ -261,14 +261,14 @@
                <td>dispose function</td>
             </tr>
             <tr>
-               <td><code>raii::win::socket_handle</code></td>
+               <td><code>rcpp::win::socket_handle</code></td>
                <td><code>SOCKET</code></td>
                <td><code>INVALID_SOCKET</code></td>
                <td><code>closesocket</code></td>
             </tr>
          </table>
       </p>
-      <h2 id="raiilibcfile">Header <a href="../raii/libc_file_handle.h">&lt;raii/libc_file_handle.h&gt;</a></h2>
+      <h2 id="rcpplibcfile">Header <a href="../rcpp/libc_file_handle.h">&lt;rcpp/libc_file_handle.h&gt;</a></h2>
       <p>
          <table>
             <tr>
@@ -278,14 +278,14 @@
                <td>dispose function</td>
             </tr>
             <tr>
-               <td><code>raii::libc::file_handle</code></td>
+               <td><code>rcpp::libc::file_handle</code></td>
                <td><code>FILE *</code></td>
                <td><code>NULL</code></td>
                <td><code>fclose</code></td>
             </tr>
          </table>
       </p>
-      <h2 id="raiiposix">Header <a href="../raii/posix_handles.h">&lt;raii/posix_handles.h&gt;</a></h2>
+      <h2 id="rcppposix">Header <a href="../rcpp/posix_handles.h">&lt;rcpp/posix_handles.h&gt;</a></h2>
       <p>
          <table>
             <tr>
@@ -295,19 +295,19 @@
                <td>dispose function</td>
             </tr>
             <tr>
-               <td><code>raii::posix::dirent_handle</code></td>
+               <td><code>rcpp::posix::dirent_handle</code></td>
                <td><code>DIR *</code></td>
                <td><code>NULL</code></td>
                <td><code>closedir</code></td>
             </tr>
             <tr>
-               <td><code>raii::posix::file_handle</code></td>
+               <td><code>rcpp::posix::file_handle</code></td>
                <td><code>int</code></td>
                <td><code>-1</code></td>
                <td><code>close</code></td>
             </tr>
             <tr>
-               <td><code>raii::posix::map_file_view_handle</code></td>
+               <td><code>rcpp::posix::map_file_view_handle</code></td>
                <td><code>std::pair&lt;void *, size_t&gt;</code></td>
                <td><code>(MAP_FAILED, 0)</code></td>
                <td><code>munmap</code></td>
@@ -328,18 +328,18 @@
          </li>
          <li>
             <p>
-               <code>raii::resource</code> is portable, but most of resource wrappers in this library is not.
+               <code>rcpp::resource</code> is portable, but most of resource wrappers in this library is not.
                Creating yet one portability layer is out of scope of this library.
             </p>
             <p>
-               For portability reason consider using higher level libraries. For example boost::filesystem instead <code>raii::posix::dirent</code>
-               or <code>raii::win::find_file_handle</code>.
+               For portability reason consider using higher level libraries. For example boost::filesystem instead <code>rcpp::posix::dirent</code>
+               or <code>rcpp::win::find_file_handle</code>.
             </p>
          </li>
       </ul>
       <h2 id="faq">Frequently Asked Questions</h2>
       <p>
-         <h3>Can I use <code>raii::resource</code> if my <code>type</code> does not have invalid value?</h3>
+         <h3>Can I use <code>rcpp::resource</code> if my <code>type</code> does not have invalid value?</h3>
          Yes, you can. You can create resource with <code>underlying_resource_type = boost::optional&lt;type&gt;</code>.
          Invalid value of this resource will be <code>boost::none</code>.
       </p>
