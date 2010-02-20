@@ -163,7 +163,7 @@
       <h2 id="rcppresource">Class rcpp::resource</h2>
       <p>
          Class <code>rcpp::resource</code> is parametrized with <a href="#resourceconfdef">resource-config</a>
-         type and provide <a href="#rcppwrapperdef">resource-wrapper</a> interface. See <a href="../rcpp/rcpp.h">&lt;rcpp/rcpp.h&gt;</a>.
+         type and provide <a href="#rcppwrapperdef">resource-wrapper</a> interface. See <a href="../rcpp/resource.h">&lt;rcpp/resource.h&gt;</a>.
       </p>
       <h2 id="rcppwinkernel">Header <a href="../rcpp/win_kernel_handles.h">&lt;rcpp/win_kernel_handles.h&gt;</a></h2>
       <p>
@@ -334,6 +334,12 @@
             <p>
                For portability reason consider using higher level libraries. For example boost::filesystem instead <code>rcpp::posix::dirent</code>
                or <code>rcpp::win::find_file_handle</code>.
+            </p>
+         </li>
+         <li>
+            <p>
+               I don't know whether <code>rcpp::win::file_handle</code> and <code>rcpp::win::kernel_handle</code> should
+               be merged <a href="http://blogs.msdn.com/oldnewthing/archive/2004/03/02/82639.aspx">[1]</a>.
             </p>
          </li>
       </ul>
