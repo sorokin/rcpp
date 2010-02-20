@@ -94,16 +94,16 @@
                <td>Create an wrapper that owns nothing</td>
             </tr>
             <tr>
-               <td><code>explicit T::T(underlying_resource_type const &&)</code></td>
+               <td><code>explicit T::T(underlying_resource_type const &amp;)</code></td>
                <td>Take ownership of resource</td>
             </tr>
             <tr>
-               <td><code>T::T(T && other)</code></td>
+               <td><code>T::T(T &amp;&amp; other)</code></td>
                <td>Take an ownership from <code>other</code>. After this operation this object owns the resource
                that object <code>other</code> owns before. After this operation <code>other</code> owns nothing</td>
             </tr>
             <tr>
-               <td><code>T & T::operator=(T && other)</code></td>
+               <td><code>T &amp; T::operator=(T &amp;&amp; other)</code></td>
                <td>Destroy object we own and take ownership from <code>other</code>. After this operation
                this object owns the resource that object <code>other</code> owns before. After this operation <code>other</code>
                owns nothing</td>
@@ -113,7 +113,7 @@
                <td>Destroy object we own</td>
             </tr>
             <tr>
-               <td><code>void T::reset(underlying_resource_type const & underlying_resource)</code></td>
+               <td><code>void T::reset(underlying_resource_type const &amp; underlying_resource)</code></td>
                <td>Destroy object we own and take ownership over <code>underlying_resource</code></td>
             </tr>
             <tr>
@@ -129,7 +129,7 @@
                <td>Returns true if we own some resource, false elsewhere</td>
             </tr>
             <tr>
-               <td><code>void std::swap(T & a, T & b)</code></td>
+               <td><code>void std::swap(T &amp; a, T &amp; b)</code></td>
                <td>Swap two resource-wrappers. After this operation object <code>a</code> owns a resource that
                <code>b</code> owned before. And <code>b</code> owns a resource that <code>a</code> owned
                before</td>
@@ -155,7 +155,7 @@
                own any resource.</td>
             </tr>
             <tr>
-               <td><code>static void dispose(T::underlying_resource_type const &)</code></td>
+               <td><code>static void dispose(T::underlying_resource_type const &amp;)</code></td>
                <td>Destroy resource</td>
             </tr>
          </table>
