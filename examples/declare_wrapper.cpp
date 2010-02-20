@@ -7,18 +7,18 @@ http://www.boost.org/LICENSE_1_0.txt)
 */
 #include "stdio.h"
 
-// rcpp::resource is localed here
+// rcpp::resource is located here
 #include "rcpp/resource.h"
 
 // this is a resource config, it contains only three things
 struct file_handle_config
 {
-   // create resource wrapper over FILE *
+   // underlying type is FILE *
    typedef FILE * underlying_resource_type;
-   
+
    // invalid value is NULL
    static FILE * invalid_value() { return NULL; }
-   
+
    // dispose function is fclose
    static void dispose(FILE * f)
    {

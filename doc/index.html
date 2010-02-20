@@ -33,7 +33,7 @@
       </ul>
       <h2 id="introduction">Introduction</h2>
       <p>
-         This library provide two facilities
+         This library provide two facilities:
          <ul>
             <li>Facility for writing C++ <a href="#rcppwrapperdef">resource-wrapper</a> class in a convenient, declarative way</li>
             <li>Collection of resource-wrappers for different platforms (Windows API, libc, POSIX)</li>
@@ -44,13 +44,13 @@
       <p>
 <pre><font color="0000ff"><strong>#include <font color="#008000">&quot;stdio.h&quot;</font></strong></font>
 
-<font color="#444444">// rcpp::resource is localed here</font>
+<font color="#444444">// rcpp::resource is located here</font>
 <font color="0000ff"><strong>#include <font color="#008000">&quot;rcpp/resource.h&quot;</font></strong></font>
 
 <font color="#444444">// this is a resource config, it contains only three things</font>
 <strong>struct</strong> <font color="#2040a0">file_handle_config</font>
 <font color="4444FF"><strong>{</strong></font>
-   <font color="#444444">// create resource wrapper over FILE *</font>
+   <font color="#444444">// underlying type is FILE *</font>
    <strong>typedef</strong> <font color="#2040a0">FILE</font> <font color="4444FF">*</font> <font color="#2040a0">underlying_resource_type</font><font color="4444FF">;</font>
 
    <font color="#444444">// invalid value is NULL</font>
@@ -79,7 +79,7 @@
       </p>
       <h2 id="rcppwrapperdef">Resource-wrapper definition</h2>
       <p>
-         Resource-wrapper class <code>T</code> is a class an instance of that contains an object of type
+         Resource-wrapper class <code>T</code> is a class an instance of which contains an object of type
          <code>underlying_resource_type</code> and has the following public members:
          <table>
             <tr>
@@ -88,7 +88,7 @@
             </tr>
             <tr>
                <td><code>T::underlying_resource_type</code></td>
-               <td>An type of object we hold</td>
+               <td>The type of object we hold</td>
             </tr>
             <tr>
                <td><code>T::T()</code></td>
@@ -105,17 +105,17 @@
             </tr>
             <tr>
                <td><code>T &amp; T::operator=(T &amp;&amp; other)</code></td>
-               <td>Destroy object we own and take ownership from <code>other</code>. After this operation
-               this object owns the resource that object <code>other</code> owns before. After this operation <code>other</code>
+               <td>Destroy the object we own and take ownership from <code>other</code>. After this operation
+               this object owns the resource that object <code>other</code> owned before. After this operation <code>other</code>
                owns nothing</td>
             </tr>
             <tr>
                <td><code>T::~T()</code></td>
-               <td>Destroy object we own</td>
+               <td>Destroy the object we own</td>
             </tr>
             <tr>
                <td><code>void T::reset(underlying_resource_type const &amp; underlying_resource)</code></td>
-               <td>Destroy object we own and take ownership over <code>underlying_resource</code></td>
+               <td>Destroy the object we own and take ownership over <code>underlying_resource</code></td>
             </tr>
             <tr>
                <td><code>underlying_resource_type T::release()</code></td>
@@ -123,11 +123,11 @@
             </tr>
             <tr>
                <td><code>underlying_resource_type T::get() const</code></td>
-               <td>Returns copy of underlying resource</td>
+               <td>Return copy of underlying resource</td>
             </tr>
             <tr>
                <td><code>operator T::&lt;unspecified-bool-type&gt;() const</code></td>
-               <td>Returns true if we own some resource, false elsewhere</td>
+               <td>Return true if we own some resource, false elsewhere</td>
             </tr>
             <tr>
                <td><code>void std::swap(T &amp; a, T &amp; b)</code></td>
@@ -139,7 +139,7 @@
       </p>
       <h2 id="resourceconfdef">Resource-config definition</h2>
       <p>
-         Resource-config class <code>T</code> is a class that have the following public members:
+         Resource-config class <code>T</code> is a class that has the following public members:
          <table>
             <tr>
                <td>Member</td>
@@ -152,19 +152,19 @@
             <tr>
                <td><code>static T::underlying_resource_type T::invalid_value()</code></td>
                <td>The value that valid object of type <code>underlying_resource_type</code> can not have.
-               If resource-wrapper underlying resource has this value it means that rcpp-wrapper does not
+               If underlying resource of resource-wrapper has this value it means that wrapper does not
                own any resource.</td>
             </tr>
             <tr>
                <td><code>static void dispose(T::underlying_resource_type const &amp;)</code></td>
-               <td>Destroy resource</td>
+               <td>Destroy the resource</td>
             </tr>
          </table>
       </p>
       <h2 id="rcppresource">Class rcpp::resource</h2>
       <p>
          Class <code>rcpp::resource</code> is parametrized with <a href="#resourceconfdef">resource-config</a>
-         type and provide <a href="#rcppwrapperdef">resource-wrapper</a> interface. See <a href="../rcpp/resource.h">&lt;rcpp/resource.h&gt;</a>.
+         type and provides <a href="#rcppwrapperdef">resource-wrapper</a> interface. See <a href="../rcpp/resource.h">&lt;rcpp/resource.h&gt;</a>.
       </p>
       <h2 id="rcppwinkernel">Header <a href="../rcpp/win_kernel_handles.h">&lt;rcpp/win_kernel_handles.h&gt;</a></h2>
       <p>
@@ -364,7 +364,7 @@
          </li>
          <li>
             <p>
-               <code>rcpp::resource</code> is portable, but most of resource wrappers in this library is not.
+               <code>rcpp::resource</code> is portable, but most of resource wrappers in this library are not.
                Creating yet one portability layer is out of scope of this library.
             </p>
             <p>
