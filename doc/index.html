@@ -38,7 +38,7 @@
             <li>Facility for writing C++ <a href="#rcppwrapperdef">resource-wrapper</a> class in a convenient, declarative way</li>
             <li>Collection of resource-wrappers for different platforms (Windows API, libc, POSIX)</li>
          </ul>
-         The library support C++0x. Every resource-wrapper you create with it will have move constuctor and move assignment operator.
+         The library supports (but does not require) C++0x. Every resource-wrapper you create with it will have move constuctor and move assignment operator.
       </p>
       <h2 id="tutorial">5-minutes tutorial</h2>
       <p>
@@ -376,6 +376,17 @@
             <p>
                I don't know whether <code>rcpp::win::file_handle</code> and <code>rcpp::win::kernel_handle</code> should
                be merged <a href="http://blogs.msdn.com/oldnewthing/archive/2004/03/02/82639.aspx">[1]</a>.
+            </p>
+         </li>
+         <li>
+            <p>
+               In C++03 you can emulate move by releasing one object and reset other: <code>a.reset(b.release())</code>.
+            </p>
+         </li>
+         <li>
+            <p>
+               It is not possible to return wrapped resource from function in C++03, but you can return corresponding
+               <code>underlying_resource_type</code> and wrap it on caller side.
             </p>
          </li>
       </ul>
