@@ -391,5 +391,8 @@
          It is also possible to create derived class. But the better solution is to create handy wrapper over created resource. This
          library is rather intended for creating other libraries than using it directly.
       </p>
+      <p><h3>Can I insert resources into <code>std::vector</code>?</h3>
+         Yes (in C++0x). Not directly (in C++03). In C++03 you can create <code>vector&lt;boost::shared_ptr&lt;resource&gt; &gt;</code>.
+      </p>
    </body>
 </html>
