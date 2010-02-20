@@ -105,8 +105,6 @@ struct dc_handle_config
 
 } // namespace detail
 
-// TODO: wglDeleteContext
-
 typedef resource<detail::accelerator_table_handle_config> accelerator_table_handle;
 typedef resource<detail::gdiobj_handle_config>            gdiobj_handle;
 typedef resource<detail::cursor_handle_config>            cursor_handle;

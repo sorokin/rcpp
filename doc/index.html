@@ -23,6 +23,7 @@
                <li><a href="#rcppwinkernel">Header &lt;rcpp/win_kernel_handles.h&gt;</a></li>
                <li><a href="#rcppwingdi">Header &lt;rcpp/win_gdi_handles.h&gt;</a></li>
                <li><a href="#rcppwinsocket">Header &lt;rcpp/win_socket_handle.h&gt;</a></li>
+               <li><a href="#rcppwinglrc">Header &lt;rcpp/win_glrc_handle.h&gt;</a></li>
                <li><a href="#rcpplibcfile">Header &lt;rcpp/libc_file_handle.h&gt;</a></li>
                <li><a href="#rcppposix">Header &lt;rcpp/posix_handles.h&gt;</a></li>
             </ul>
@@ -277,6 +278,23 @@
                <td><code>SOCKET</code></td>
                <td><code>INVALID_SOCKET</code></td>
                <td><code>closesocket</code></td>
+            </tr>
+         </table>
+      </p>
+      <h2 id="rcppwinglrc">Header <a href="../rcpp/win_glrc_handle.h">&lt;rcpp/win_glrc_handle.h&gt;</a></h2>
+      <p>
+         <table>
+            <tr>
+               <td>resource wrapper</td>
+               <td>underlying resource type</td>
+               <td>invalid value</td>
+               <td>dispose function</td>
+            </tr>
+            <tr>
+               <td><code>rcpp::win::glrc_handle</code></td>
+               <td><code>HGLRC</code></td>
+               <td><code>NULL</code></td>
+               <td><code>wglDeleteContext</code></td>
             </tr>
          </table>
       </p>
