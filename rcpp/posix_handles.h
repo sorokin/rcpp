@@ -12,6 +12,7 @@ http://www.boost.org/LICENSE_1_0.txt)
 #include <dirent.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include <semaphore.h>
 #include "resource.h"
 
 namespace rcpp {
@@ -51,11 +52,23 @@ struct map_file_view_handle_config
    }
 };
 
+struct semaphore_handle_config
+{
+   typedef sem_t * underlying_resource_type;
+   static sem_t * invalid_value() { return SEM_FAILED; }
+   static void dispose(sem_t * sem)
+   {
+      int r = ::sem_close(sem);
+      assert(r == 0);
+   }
+};
+
 } // namespace detail
 
 typedef resource<detail::dirent_handle_config>        dirent_handle;
 typedef resource<detail::file_handle_config>          file_handle;
 typedef resource<detail::map_file_view_handle_config> map_file_view_handle;
+typedef resource<detail::semaphore_handle_config>     semaphore_handle;
 
 } // namespace posix
 } // namespace rcpp
