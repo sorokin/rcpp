@@ -27,6 +27,18 @@ struct resource_config
 namespace rcpp
 {
    template <typename resource_config>
+   struct resource;
+}
+
+namespace std
+{
+   template <typename resource_config>
+   void swap(rcpp::resource<resource_config> & a, rcpp::resource<resource_config> & b);
+}
+
+namespace rcpp
+{
+   template <typename resource_config>
    struct resource : boost::noncopyable
    {
       typedef typename resource_config::underlying_resource_type underlying_resource_type;
@@ -83,17 +95,49 @@ namespace rcpp
          return underlying_resource;
       }
 
-      void swap(resource<resource_config> & other)
-      {
-         using std::swap;
-         swap(underlying_resource, other.underlying_resource);
-      }
-
       RCPP_SAFE_BOOL_OPERATOR(underlying_resource != resource_config::invalid_value())
 
    private:
       underlying_resource_type underlying_resource;
+
+      friend void std::swap<resource_config>(resource<resource_config> &, resource<resource_config> &);
    };
+
+   template <typename resource_config>
+   bool operator<(resource<resource_config> const & a, resource<resource_config> const & b)
+   {
+      return a.get() < b.get();
+   }
+
+   template <typename resource_config>
+   bool operator<=(resource<resource_config> const & a, resource<resource_config> const & b)
+   {
+      return a.get() <= b.get();
+   }
+
+   template <typename resource_config>
+   bool operator==(resource<resource_config> const & a, resource<resource_config> const & b)
+   {
+      return a.get() == b.get();
+   }
+
+   template <typename resource_config>
+   bool operator!=(resource<resource_config> const & a, resource<resource_config> const & b)
+   {
+      return a.get() != b.get();
+   }
+
+   template <typename resource_config>
+   bool operator>(resource<resource_config> const & a, resource<resource_config> const & b)
+   {
+      return a.get() > b.get();
+   }
+
+   template <typename resource_config>
+   bool operator>=(resource<resource_config> const & a, resource<resource_config> const & b)
+   {
+      return a.get() >= b.get();
+   }
 }
 
 namespace std
@@ -101,7 +145,8 @@ namespace std
    template <typename resource_config>
    void swap(rcpp::resource<resource_config> & a, rcpp::resource<resource_config> & b)
    {
-      a.swap(b);
+      using std::swap;
+      swap(a.underlying_resource, b.underlying_resource);
    }
 }
 
