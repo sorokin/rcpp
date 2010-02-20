@@ -28,7 +28,7 @@ struct socket_handle_config
 
 } // namespace detail
 
-typedef resource<socket_handle_config> socket_handle;
+typedef resource<detail::socket_handle_config> socket_handle;
 
 } // namespace win
 } // namespace rcpp
