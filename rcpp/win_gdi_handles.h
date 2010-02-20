@@ -81,9 +81,31 @@ struct window_handle_config
    }
 };
 
+struct common_dc_handle_config
+{
+   typedef std::pair<HWND, HDC> underlying_resource_type;
+   static underlying_resource_type invalid_value() { return underlying_resource_type(NULL, NULL); }
+   static void dispose(underlying_resource_type const & wnd_dc)
+   {
+      BOOL r = ::ReleaseDC(wnd_dc.first, wnd_dc.second);
+      assert(r != FALSE);
+   }
+};
+
+struct dc_handle_config
+{
+   typedef HDC underlying_resource_type;
+   static HDC invalid_value() { return NULL; }
+   static void dispose(HDC dc)
+   {
+      BOOL r = ::DeleteDC(dc);
+      assert(r != FALSE);
+   }
+};
+
 } // namespace detail
 
-// TODO: ReleaseDC, DeleteDC, wglDeleteContext
+// TODO: wglDeleteContext
 
 typedef resource<detail::accelerator_table_handle_config> accelerator_table_handle;
 typedef resource<detail::gdiobj_handle_config>            gdiobj_handle;
@@ -91,6 +113,8 @@ typedef resource<detail::cursor_handle_config>            cursor_handle;
 typedef resource<detail::icon_handle_config>              icon_handle;
 typedef resource<detail::menu_handle_config>              menu_handle;
 typedef resource<detail::window_handle_config>            window_handle;
+typedef resource<detail::common_dc_handle_config>         common_dc_handle;
+typedef resource<detail::dc_handle_config>                dc_handle;
 
 } // namespace win
 } // namespace rcpp
