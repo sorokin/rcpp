@@ -315,19 +315,39 @@
          </table>
       </p>
       <h2 id="notes">Notes</h2>
-      <p>
-         Standard Windows system headers are sensitive to inclusion order. So none of Windows-specific
-         headers of this library includes &lt;windows.h&gt;. The user should include it manually in order
-         he want.
-      </p>
-      <p>
-         POSIX- and libc- headers include corresponding system headers itselves.
-      </p>
+      <ul>
+         <li>
+            <p>
+               Standard Windows system headers are sensitive to inclusion order. So none of Windows-specific
+               headers of this library includes <code>&lt;windows.h&gt;</code>. The user should include it manually in order
+               he want.
+            </p>
+            <p>
+               POSIX- and libc- headers include corresponding system headers itselves.
+            </p>
+         </li>
+         <li>
+            <p>
+               <code>raii::resource</code> is portable, but most of resource wrappers in this library is not.
+               Creating yet one portability layer is out of scope of this library.
+            </p>
+            <p>
+               For portability reason consider using higher level libraries. For example boost::filesystem instead <code>raii::posix::dirent</code>
+               or <code>raii::win::find_file_handle</code>.
+            </p>
+         </li>
+      </ul>
       <h2 id="faq">Frequently Asked Questions</h2>
       <p>
          <h3>Can I use <code>raii::resource</code> if my <code>type</code> does not have invalid value?</h3>
          Yes, you can. You can create resource with <code>underlying_resource_type = boost::optional&lt;type&gt;</code>.
          Invalid value of this resource will be <code>boost::none</code>.
+      </p>
+      <p><h3>Can I expand resource I created with extra constuctors or member-functions?</h3>
+         If you want extra constuctor for your class you can write global function that returns your resource (works only in C++0x).
+         If you want extra function &mdash; you can write global function that receive your resource as argument.
+         It is also possible to create derived class. But the better solution is to create handy wrapper over created resource. This
+         library is rather intended for creating other libraries than using it directly.
       </p>
    </body>
 </html>
