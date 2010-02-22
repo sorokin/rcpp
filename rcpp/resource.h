@@ -15,7 +15,6 @@ http://www.boost.org/LICENSE_1_0.txt)
 #include "safe_bool.h"
 
 /*
-template <typename T>
 struct resource_config
 {
    typedef ... underlying_resource_type;
