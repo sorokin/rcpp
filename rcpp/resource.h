@@ -51,7 +51,7 @@ namespace rcpp
          : underlying_resource(underlying_resource)
       {}
 
-#ifdef BOOST_HAS_RVALUE_REFS
+#ifndef BOOST_NO_RVALUE_REFERENCES
       resource(resource<resource_config> && other)
          : underlying_resource(other.underlying_resource)
       {
