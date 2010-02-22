@@ -405,5 +405,9 @@
       <p><h3>Can I insert resources into <code>std::vector</code>?</h3>
          Yes (in C++0x). Not directly (in C++03). In C++03 you can create <code>vector&lt;boost::shared_ptr&lt;resource&gt; &gt;</code>.
       </p>
+      <p><h3>Is it more convenient to have <code>operator*()</code> instead of function <code>get()</code>?
+      <code>attach()</code>/<code>detach()</code> instead of <code>reset</code>/<code>release</code>?</h3>
+      I think yes, but I'm following <code>auto_ptr</code>/<code>unique_ptr</code> terminology.
+      </p>
    </body>
 </html>
