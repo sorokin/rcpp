@@ -111,16 +111,44 @@ struct dc_handle_config
    }
 };
 
+void unregister_class(char const * name, HINSTANCE instance)
+{
+   BOOL r = ::UnregisterClassA(name, instance);
+   r;
+   assert(r != FALSE);
+}
+
+void unregister_class(wchar_t const * name, HINSTANCE instance)
+{
+   BOOL r = ::UnregisterClassW(name, instance);
+   r;
+   assert(r != FALSE);
+}
+
+template <typename char_type>
+struct class_handle_config
+{
+   typedef std::pair<char_type const *, HINSTANCE> underlying_resource_type;
+   static underlying_resource_type invalid_value() { return underlying_resource_type(NULL, NULL); }
+   static void dispose(underlying_resource_type const & c)
+   {
+      unregister_class(c.first, c.second);
+   }
+};
+
 } // namespace detail
 
-typedef resource<detail::accelerator_table_handle_config> accelerator_table_handle;
-typedef resource<detail::gdiobj_handle_config>            gdiobj_handle;
-typedef resource<detail::cursor_handle_config>            cursor_handle;
-typedef resource<detail::icon_handle_config>              icon_handle;
-typedef resource<detail::menu_handle_config>              menu_handle;
-typedef resource<detail::window_handle_config>            window_handle;
-typedef resource<detail::common_dc_handle_config>         common_dc_handle;
-typedef resource<detail::dc_handle_config>                dc_handle;
+typedef resource<detail::accelerator_table_handle_config>            accelerator_table_handle;
+typedef resource<detail::gdiobj_handle_config>                       gdiobj_handle;
+typedef resource<detail::cursor_handle_config>                       cursor_handle;
+typedef resource<detail::icon_handle_config>                         icon_handle;
+typedef resource<detail::menu_handle_config>                         menu_handle;
+typedef resource<detail::window_handle_config>                       window_handle;
+typedef resource<detail::common_dc_handle_config>                    common_dc_handle ;
+typedef resource<detail::dc_handle_config>                           dc_handle;
+typedef resource<detail::class_handle_config<TCHAR> >                class_handle;
+typedef resource<detail::class_handle_config<char> >                 classa_handle;
+typedef resource<detail::class_handle_config<wchar_t> >              classw_handle;
 
 } // namespace win
 } // namespace rcpp

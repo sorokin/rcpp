@@ -268,7 +268,18 @@ document.write("<a href=" + "mail" + "to:" + mp1 +
                <td><code>NULL</code></td>
                <td><code>DeleteDC</code></td>
             </tr>
+            <tr>
+               <td><code>rcpp::win::class_handle</code></td>
+               <td><code>std::pair&lt;TCHAR const *, HINSTANCE&gt;</code></td>
+               <td><code>(NULL, NULL)</code></td>
+               <td><code>UnregisterClass</code></td>
+            </tr>
          </table>
+         <p>
+            Really there are two <code>class_handle</code> classes: <code>classa_handle</code> and
+            <code>classw_handle</code>. <code>class_handle</code> is just a synonym for one of them
+            depending on what <code>TCHAR</code> is.
+         </p>
       <h2 id="rcppwinsocket">Header <a href="../rcpp/win_socket_handle.h">&lt;rcpp/win_socket_handle.h&gt;</a></h2>
       <p>
          <table>
