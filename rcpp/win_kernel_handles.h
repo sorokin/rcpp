@@ -22,6 +22,7 @@ struct file_handle_config
    static void dispose(HANDLE handle)
    {
       BOOL r = ::CloseHandle(handle);
+      r;
       assert(r != FALSE);
    }
 };
@@ -33,6 +34,7 @@ struct kernel_handle_config
    static void dispose(HANDLE handle)
    {
       BOOL r = ::CloseHandle(handle);
+      r;
       assert(r != FALSE);
    }
 };
@@ -44,6 +46,7 @@ struct find_file_handle_config
    static void dispose(HANDLE handle)
    {
       BOOL r = ::FindClose(handle);
+      r;
       assert(r != FALSE);
    }
 };
@@ -55,6 +58,7 @@ struct module_handle_config
    static void dispose(HMODULE module)
    {
       BOOL r = ::FreeLibrary(module);
+      r;
       assert(r != FALSE);
    }
 };
@@ -66,6 +70,7 @@ struct map_file_view_handle_config
    static void dispose(void * base_address)
    {
       BOOL r = ::UnmapViewOfFile(base_address);
+      r;
       assert(r != FALSE);
    }
 };

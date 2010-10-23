@@ -23,6 +23,7 @@ struct file_handle_config
    static void dispose(FILE * file)
    {
       int r = ::fclose(file);
+      r;
       assert(r == 0);
    }
 };

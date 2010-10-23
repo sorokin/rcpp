@@ -22,6 +22,7 @@ struct accelerator_table_handle_config
    static void dispose(HACCEL accel)
    {
       BOOL r = ::DestroyAcceleratorTable(accel);
+      r;
       assert(r != FALSE);
    }
 };
@@ -33,6 +34,7 @@ struct gdiobj_handle_config
    static void dispose(HGDIOBJ gdiobj)
    {
       BOOL r = ::DeleteObject(gdiobj);
+      r;
       assert(r != FALSE);
    }
 };
@@ -44,6 +46,7 @@ struct cursor_handle_config
    static void dispose(HCURSOR cursor)
    {
       BOOL r = ::DestroyCursor(cursor);
+      r;
       assert(r != FALSE);
    }
 };
@@ -55,6 +58,7 @@ struct icon_handle_config
    static void dispose(HICON icon)
    {
       BOOL r = ::DestroyIcon(icon);
+      r;
       assert(r != FALSE);
    }
 };
@@ -66,6 +70,7 @@ struct menu_handle_config
    static void dispose(HMENU menu)
    {
       BOOL r = ::DestroyMenu(menu);
+      r;
       assert(r != FALSE);
    }
 };
@@ -77,6 +82,7 @@ struct window_handle_config
    static void dispose(HWND window)
    {
       BOOL r = ::DestroyWindow(window);
+      r;
       assert(r != FALSE);
    }
 };
@@ -88,6 +94,7 @@ struct common_dc_handle_config
    static void dispose(underlying_resource_type const & wnd_dc)
    {
       BOOL r = ::ReleaseDC(wnd_dc.first, wnd_dc.second);
+      r;
       assert(r != FALSE);
    }
 };
@@ -99,6 +106,7 @@ struct dc_handle_config
    static void dispose(HDC dc)
    {
       BOOL r = ::DeleteDC(dc);
+      r;
       assert(r != FALSE);
    }
 };

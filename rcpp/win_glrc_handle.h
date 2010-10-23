@@ -22,6 +22,7 @@ struct glrc_handle_config
    static void dispose(HGLRC glrc)
    {
       BOOL r = ::wglDeleteContext(glrc);
+      r;
       assert(r != FALSE);
    }
 };

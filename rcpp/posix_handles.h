@@ -26,6 +26,7 @@ struct dirent_handle_config
    static void dispose(DIR * dir)
    {
       int r = ::closedir(dir);
+      r;
       assert(r == 0);
    }
 };
@@ -37,6 +38,7 @@ struct file_handle_config
    static void dispose(int fd)
    {
       int r = ::close(fd);
+      r;
       assert(r == 0);
    }
 };
@@ -48,6 +50,7 @@ struct map_file_view_handle_config
    static void dispose(underlying_resource_type const & address_length)
    {
       int r = ::munmap(address_length.first, address_length.second);
+      r;
       assert(r == 0);
    }
 };
@@ -59,6 +62,7 @@ struct semaphore_handle_config
    static void dispose(sem_t * sem)
    {
       int r = ::sem_close(sem);
+      r;
       assert(r == 0);
    }
 };

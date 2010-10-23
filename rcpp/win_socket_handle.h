@@ -22,6 +22,7 @@ struct socket_handle_config
    static void dispose(SOCKET sock)
    {
       int r = ::closesocket(sock);
+      r;
       assert(r == 0);
    }
 };
