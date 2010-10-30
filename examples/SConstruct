@@ -1,0 +1,6 @@
+dbg = Environment(CPPPATH='..', CXXFLAGS = ["-ggdb", "-std=c++0x"])
+
+dbg.Program(target = "cat", source = ["cat.cpp"])
+dbg.Program(target = "declare_wrapper", source = ["declare_wrapper.cpp"])
+dbg.Program(target = "posix_file_mapping", source = ["posix_file_mapping.cpp"])
+dbg.Program(target = "vector_shuffle", source = ["vector_shuffle.cpp"])
