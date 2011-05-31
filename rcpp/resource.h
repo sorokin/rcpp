@@ -63,6 +63,8 @@ namespace rcpp
 
          using std::swap;
          swap(*this, tmp);
+
+         return *this;
       }
 #endif
 
